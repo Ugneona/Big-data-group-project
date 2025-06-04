@@ -1,19 +1,19 @@
 # Big-data-group-project
 
-**Purpose of this project** is to detect marine transportation ports in the dataset. The tasks were implemented using pyspark.
+**Purpose of this project** is to detect marine transportation ports in the dataset. The tasks were implemented using pyspark. The joint code for all tasks is in ```big_data_group_join.py``` file, and in ```bd_5_spatial_knn.ipynb``` file is performed filtering, spatial binning, and k-means clustering. In ```ports_dbscan_spatial.ipynb``` filtering, spatial binning and dbscan clustering are performed.
 
 **The tasks** to achieve this goal are:
 
 ## 1. Filtering out the noise and preparing data for port detection
 **General Filtering Logic:**
 
-- Only take useful columns, drop NA values, cast to appropriate data types.
+- Only take useful columns, drop NA values, and cast to appropriate data types.
 - Remove ships with non-standard coordinate types and helicopters by filtering the "Ship type" column.
 
 
 **Filtering For Port Detection Logic:**
 
-- Filter out moving vessels that send GPS messages for speed of 0.5 by "SOG" or higher for more than 5 times. The "SOG" < 0.5 decision was made to include nearby "waiting to port" ships. For message count > 5 decision was made to exclude ships "traveling in chanel" and slowing down for a small period of time.
+- Filter out moving vessels that send GPS messages for a speed of 0.5 by "SOG" or higher for more than 5 times. The "SOG" < 0.5 decision was made to include nearby "waiting to port" ships. For message count > 5 decision was made to exclude ships "traveling in chanel" and slowing down for a small period of time.
 - Filter out vessels that have traveled more than 10 kilometers in the given day. Traveled < 10km decision was made to include "fishing near port" ships.
 ## 2. Creating an algorithm(s) for port detection
 ### a) Spatial binning algorithm
